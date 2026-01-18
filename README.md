@@ -21,4 +21,4 @@ Instead of simple concatenation, this model progressively fuses information from
 
 * Python 3.8+
 * PyTorch >= 1.8
-* NVIDIA GPU (Recommended)
+
