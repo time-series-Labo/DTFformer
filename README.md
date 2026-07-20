@@ -9,6 +9,16 @@ Instead of simple concatenation, this model progressively fuses information from
 * **Macro-Level:** Employs inter-layer gating networks to dynamically modulate the interaction strength between branches.
 * **Noise Reduction:** Features an **AmpT-Filter** (Adaptive Amplitude Transformation Filter) to enhance the signal-to-noise ratio by adaptively weighting frequency components.
 
+## 🏗️ Model Architecture
+
+<p align="center">
+  <img src="./DTFformer_architecture.png" alt="DTFformer Architecture" width="900">
+</p>
+
+<p align="center">
+  <em>Figure 1. Overall architecture of DTFformer.</em>
+</p>
+
 ## ✨ Key Features
 
 * **Dual-Branch Architecture:** Processes temporal and frequency features in parallel with deep interaction.
