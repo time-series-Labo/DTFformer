@@ -1,36 +1,34 @@
 import os
 import torch
-from models import Autoformer, Transformer, DLinear,  PatchTST, iTransformer, PatchFFT, PatchFFT3,Patch_cat_fre, \
-    WPMixer,PatchMLP,TimeMixer, TimeXer, TimesNet,FilterTS, Fredformer, MultiPatchFormer, Leddam, FEDformer
+from models import (
+    DLinear,
+    DTFformer,
+    FEDformer,
+    FilterTS,
+    PatchTST,
+    TimeMixer,
+    WPMixer,
+    iTransformer,
+)
 
 
 class Exp_Basic(object):
     def __init__(self, args):
         self.args = args
         self.model_dict = {
-            'Autoformer': Autoformer,
-            'Transformer': Transformer,
+            'DTFformer': DTFformer,
             'DLinear': DLinear,
             'PatchTST': PatchTST,
-            'PatchFFT':PatchFFT,
-            'PatchFFT3': PatchFFT3,
-            'iTransformer':iTransformer,
-            'Patch_cat_fre':Patch_cat_fre,
-            'WPMixer':WPMixer,
-            'PatchMLP':PatchMLP,
-            'TimeMixer':TimeMixer,
-            'TimeXer':TimeXer,
-            'TimesNet':TimesNet,
-            'FilterTS':FilterTS,
-            'Fredformer':Fredformer,
-            'MultiPatchFormer':MultiPatchFormer,
-            'Leddam':Leddam,
-            'FEDformer':FEDformer,
+            'iTransformer': iTransformer,
+            'WPMixer': WPMixer,
+            'TimeMixer': TimeMixer,
+            'FilterTS': FilterTS,
+            'FEDformer': FEDformer,
         }
-        if args.model == 'Mamba':
-            print('Please make sure you have successfully installed mamba_ssm')
-            from models import Mamba
-            self.model_dict['Mamba'] = Mamba
+
+        if args.model not in self.model_dict:
+            available = ', '.join(sorted(self.model_dict))
+            raise ValueError(f"Unknown model '{args.model}'. Available models: {available}")
 
         self.device = self._acquire_device()
         self.model = self._build_model().to(self.device)
