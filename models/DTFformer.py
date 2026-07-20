@@ -283,7 +283,7 @@ class Model(nn.Module):
             time_features_out, _ = self.guided_encoder_layers[i](time_features, context=guided_features)
             guided_features_out, _ = self.time_to_fre_encoder_layers[i](guided_features, context=time_features)
 
-            time_features, guided_features, _ = self.interaction_layers[i](time_features_out, guided_features_out)
+            time_features, guided_features = self.interaction_layers[i](time_features_out, guided_features_out)
 
         time_features = self.norm_time(time_features)
         guided_features = self.norm_guided(guided_features)
