@@ -86,3 +86,16 @@ python run.py \
 Available models are `DTFformer`, `DLinear`, `FEDformer`, `FilterTS`, `PatchTST`, `TimeMixer`, `WPMixer`, and `iTransformer`.
 
 The main experimental settings reported in the paper use an input length of 96, prediction lengths in `{96, 192, 336, 720}`, a batch size of 64, two encoder layers, a model dimension of 512, eight attention heads, a learning rate of `5e-5`, and three independent runs.
+
+## Reproduction scripts
+
+Model-specific scripts for DTFformer and all seven baselines are provided under [`scripts/long_term_forecast`](scripts/long_term_forecast). They cover the seven paper datasets and all four prediction lengths with the shared training protocol documented above.
+
+Run one model or the complete suite with Bash, Git Bash, or WSL:
+
+```bash
+bash scripts/long_term_forecast/DTFformer.sh
+bash scripts/long_term_forecast/run_all.sh
+```
+
+See the [script documentation](scripts/long_term_forecast/README.md) for model-specific settings and commands for running smaller subsets.
