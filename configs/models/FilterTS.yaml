@@ -1,0 +1,54 @@
+schema_version: 1
+base_config: ../common.yaml
+model: FilterTS
+
+default_args:
+  filter_type: all
+  quantile: 0.9
+  bandwidth: 1
+  embedding: fourier_interpolate
+  top_K_static_freqs: 10
+  use_norm: 1
+  factor: 3
+
+dataset_args:
+  ETTh1:
+    horizon_args:
+      96: {d_model: 128, e_layers: 4}
+      192: {d_model: 128, e_layers: 4}
+      336: {d_model: 256, e_layers: 4}
+      720: {d_model: 512, e_layers: 3}
+  ETTh2:
+    horizon_args:
+      96: {d_model: 512, e_layers: 3}
+      192: {d_model: 512, e_layers: 3}
+      336: {d_model: 128, e_layers: 1}
+      720: {d_model: 128, e_layers: 3}
+  ETTm1:
+    horizon_args:
+      96: {d_model: 128, e_layers: 3}
+      192: {d_model: 128, e_layers: 3}
+      336: {d_model: 512, e_layers: 1}
+      720: {d_model: 512, e_layers: 1}
+  ETTm2:
+    horizon_args:
+      96: {d_model: 256, e_layers: 3}
+      192: {d_model: 128, e_layers: 3}
+      336: {d_model: 256, e_layers: 3}
+      720: {d_model: 256, e_layers: 3}
+  weather:
+    horizon_args:
+      96: {d_model: 128, e_layers: 2}
+      192: {d_model: 256, e_layers: 3}
+      336: {d_model: 128, e_layers: 3}
+      720: {d_model: 128, e_layers: 2}
+  wind1:
+    default_args: {d_model: 512, e_layers: 2}
+  wind2:
+    default_args: {d_model: 512, e_layers: 2}
+
+provenance:
+  public_datasets: FilterTS_official_scripts
+  wind1: private_dataset_common_protocol
+  wind2: private_dataset_common_protocol
+  official_repository: https://github.com/wyl010607/FilterTS

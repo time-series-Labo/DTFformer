@@ -26,9 +26,9 @@ class Model(nn.Module):
         self.label_len = configs.label_len
         self.pred_len = configs.pred_len
 
-        self.version = version
-        self.mode_select = mode_select
-        self.modes = modes
+        self.version = getattr(configs, 'version', version)
+        self.mode_select = getattr(configs, 'mode_select', mode_select)
+        self.modes = getattr(configs, 'modes', modes)
 
         # Decomp
         self.decomp = series_decomp(configs.moving_avg)

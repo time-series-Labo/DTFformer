@@ -1,0 +1,54 @@
+schema_version: 1
+base_config: ../common.yaml
+model: PatchTST
+
+default_args:
+  d_model: 512
+  d_ff: 2048
+  dropout: 0.1
+  activation: gelu
+  patch_len: 16
+  stride: 8
+
+dataset_args:
+  ETTh1:
+    default_args: {e_layers: 1, factor: 3}
+    horizon_args:
+      96: {n_heads: 2}
+      192: {n_heads: 8}
+      336: {n_heads: 8}
+      720: {n_heads: 16}
+  ETTh2:
+    default_args: {e_layers: 3, n_heads: 4, factor: 3}
+  ETTm1:
+    default_args: {factor: 3}
+    horizon_args:
+      96: {e_layers: 1, n_heads: 2}
+      192: {e_layers: 3, n_heads: 2}
+      336: {e_layers: 1, n_heads: 4}
+      720: {e_layers: 3, n_heads: 4}
+  ETTm2:
+    default_args: {factor: 3}
+    horizon_args:
+      96: {e_layers: 3, n_heads: 16}
+      192: {e_layers: 3, n_heads: 2}
+      336: {e_layers: 1, n_heads: 4}
+      720: {e_layers: 3, n_heads: 4}
+  weather:
+    default_args: {e_layers: 2, factor: 3}
+    horizon_args:
+      96: {n_heads: 4}
+      192: {n_heads: 16}
+      336: {n_heads: 4}
+      720: {n_heads: 4}
+  wind1:
+    default_args: {e_layers: 2, n_heads: 8, factor: 1}
+  wind2:
+    default_args: {e_layers: 2, n_heads: 8, factor: 1}
+
+provenance:
+  public_datasets: THUML_official_scripts
+  patch_parameters: manuscript_main_experiment
+  wind1: private_dataset_common_protocol
+  wind2: private_dataset_common_protocol
+  official_repository: https://github.com/thuml/Time-Series-Library

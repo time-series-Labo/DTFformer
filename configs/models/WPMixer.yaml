@@ -1,0 +1,26 @@
+schema_version: 1
+base_config: ../common.yaml
+model: WPMixer
+
+# The THUML scripts tune WPMixer for seq_len=512. The paper uses seq_len=96,
+# so the active configuration follows the local implementation and paper
+# protocol instead of importing incompatible 512-step settings.
+default_args:
+  d_model: 512
+  dropout: 0.1
+  patch_len: 16
+  stride: 8
+  wavelet: db2
+  level: 1
+  tfactor: 5
+  dfactor: 5
+  no_decomposition: false
+
+protocol_decisions:
+  seq_len: inherited_from_common_as_96
+  public_dataset_fallback: local_historical_and_current_implementation
+  private_dataset_policy: same_applicable_settings_as_DTFformer
+
+provenance:
+  official_reference: https://github.com/thuml/Time-Series-Library/tree/main/scripts/long_term_forecast
+  active_parameters: local_historical_and_current_implementation
