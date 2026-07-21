@@ -85,11 +85,13 @@ python run.py \
 
 Available models are `DTFformer`, `DLinear`, `FEDformer`, `FilterTS`, `PatchTST`, `TimeMixer`, `WPMixer`, and `iTransformer`.
 
-The main experimental settings reported in the paper use an input length of 96, prediction lengths in `{96, 192, 336, 720}`, a batch size of 64, two encoder layers, a model dimension of 512, eight attention heads, a learning rate of `5e-5`, and three repeated runs. For each dataset-and-horizon setting, the random number generators are initialized once with seed `2021` before the repetition loop and are not reseeded between repetitions.
+The shared experimental protocol uses an input length of 96, prediction lengths in `{96, 192, 336, 720}`, batch size 64, learning rate `5e-5`, and three repeated runs. DTFformer uses two encoder layers, model dimension 512, and eight attention heads; baseline architecture parameters are recorded separately in their model configurations. For each dataset-and-horizon setting, the random number generators are initialized once with seed `2021` before the repetition loop and are not reseeded between repetitions.
 
 ## Reproduction scripts
 
 Model-specific scripts for DTFformer and all seven baselines are provided under [`scripts/long_term_forecast`](scripts/long_term_forecast). They cover the seven paper datasets and all four prediction lengths with the shared training protocol documented above.
+
+The authoritative common and model-specific parameters are stored under [`configs/`](configs/). `run_config.py` merges common, model, dataset, and prediction-horizon settings before invoking `run.py`; the reproduction scripts use this resolver automatically.
 
 Run one model or the complete suite with Bash, Git Bash, or WSL:
 

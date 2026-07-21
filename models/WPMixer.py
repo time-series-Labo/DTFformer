@@ -274,6 +274,12 @@ class Model(nn.Module):
         super(Model, self).__init__()
         self.args = args
         self.task_name = args.task_name
+        tfactor = getattr(args, 'tfactor', tfactor)
+        dfactor = getattr(args, 'dfactor', dfactor)
+        wavelet = getattr(args, 'wavelet', wavelet)
+        level = getattr(args, 'level', level)
+        stride = getattr(args, 'stride', stride)
+        no_decomposition = getattr(args, 'no_decomposition', no_decomposition)
         self.wpmixerCore = WPMixerCore(input_length=self.args.seq_len,
                                        pred_length=self.args.pred_len,
                                        wavelet_name=wavelet,

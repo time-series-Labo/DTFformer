@@ -1,0 +1,118 @@
+schema_version: 1
+
+forecast_args:
+  task_name: long_term_forecast
+  is_training: 1
+  features: M
+  seq_len: 96
+  label_len: 48
+  inverse: false
+
+prediction_lengths: [96, 192, 336, 720]
+
+datasets:
+  ETTh1:
+    data: ETTh1
+    root_path: dataset/ETT/
+    data_path: ETTh1.csv
+    target: OT
+    freq: h
+    enc_in: 7
+    dec_in: 7
+    c_out: 7
+  ETTh2:
+    data: ETTh2
+    root_path: dataset/ETT/
+    data_path: ETTh2.csv
+    target: OT
+    freq: h
+    enc_in: 7
+    dec_in: 7
+    c_out: 7
+  ETTm1:
+    data: ETTm1
+    root_path: dataset/ETT/
+    data_path: ETTm1.csv
+    target: OT
+    freq: t
+    enc_in: 7
+    dec_in: 7
+    c_out: 7
+  ETTm2:
+    data: ETTm2
+    root_path: dataset/ETT/
+    data_path: ETTm2.csv
+    target: OT
+    freq: t
+    enc_in: 7
+    dec_in: 7
+    c_out: 7
+  weather:
+    data: weather
+    root_path: dataset/
+    data_path: weather.csv
+    target: OT
+    freq: t
+    enc_in: 21
+    dec_in: 21
+    c_out: 21
+  wind1:
+    data: wind1
+    root_path: dataset/
+    data_path: wind1.csv
+    target: C_VALUE
+    freq: t
+    enc_in: 26
+    dec_in: 26
+    c_out: 26
+  wind2:
+    data: wind2
+    root_path: dataset/
+    data_path: wind2.csv
+    target: C_VALUE
+    freq: t
+    enc_in: 26
+    dec_in: 26
+    c_out: 26
+
+training_args:
+  train_epochs: 10
+  batch_size: 64
+  patience: 3
+  learning_rate: 0.00005
+  loss: MSE
+  lradj: type1
+  num_workers: 0
+  use_amp: false
+
+training_metadata:
+  optimizer: Adam
+  reported_metrics: [MSE, MAE]
+
+reproducibility_args:
+  itr: 3
+  seed: 2021
+
+evaluation_args:
+  use_dtw: false
+
+device_args:
+  use_gpu: true
+  gpu_type: cuda
+  gpu: 0
+  use_multi_gpu: false
+
+output_args:
+  checkpoints: checkpoints/
+  des: paper_reproduction
+
+seed_policy:
+  initialization: once_before_repetition_loop
+  reseed_between_repetitions: false
+
+environment:
+  python: "3.8.20"
+  pytorch: "1.12.1+cu116"
+  cuda: "11.6"
+  cudnn: 8302
+  reference_gpu: NVIDIA GeForce RTX 3080

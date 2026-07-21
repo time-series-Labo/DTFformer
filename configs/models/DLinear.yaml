@@ -1,0 +1,14 @@
+schema_version: 1
+base_config: ../common.yaml
+model: DLinear
+
+default_args:
+  moving_avg: 25
+  individual: false
+
+provenance:
+  ETTh1: THUML_official_script
+  remaining_public_datasets: local_implementation_defaults
+  wind1: private_dataset_common_protocol
+  wind2: private_dataset_common_protocol
+  official_repository: https://github.com/thuml/Time-Series-Library

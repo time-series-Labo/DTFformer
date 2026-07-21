@@ -1,0 +1,37 @@
+schema_version: 1
+base_config: ../common.yaml
+model: iTransformer
+
+default_args:
+  d_model: 512
+  n_heads: 8
+  e_layers: 2
+  d_ff: 2048
+  dropout: 0.1
+  activation: gelu
+  embed: learned
+  factor: 1
+
+dataset_args:
+  ETTh2:
+    default_args:
+      d_model: 128
+      e_layers: 2
+      d_ff: 128
+      factor: 3
+  weather:
+    default_args:
+      d_model: 512
+      e_layers: 3
+      d_ff: 512
+      factor: 3
+
+provenance:
+  ETTh2: THUML_official_script
+  weather: THUML_official_script
+  ETTh1: local_historical_and_manuscript_fallback
+  ETTm1: local_historical_and_manuscript_fallback
+  ETTm2: local_historical_and_manuscript_fallback
+  wind1: private_dataset_common_protocol
+  wind2: private_dataset_common_protocol
+  official_repository: https://github.com/thuml/Time-Series-Library

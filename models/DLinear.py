@@ -22,7 +22,7 @@ class Model(nn.Module):
             self.pred_len = configs.pred_len
         # Series decomposition block from Autoformer
         self.decompsition = series_decomp(configs.moving_avg)
-        self.individual = individual
+        self.individual = getattr(configs, 'individual', individual)
         self.channels = configs.enc_in
 
         if self.individual:

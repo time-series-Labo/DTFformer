@@ -1,0 +1,31 @@
+schema_version: 1
+base_config: ../common.yaml
+model: FEDformer
+
+default_args:
+  d_model: 512
+  n_heads: 8
+  e_layers: 2
+  d_layers: 1
+  d_ff: 2048
+  dropout: 0.1
+  activation: gelu
+  embed: learned
+  moving_avg: 25
+  factor: 1
+  version: fourier
+  mode_select: random
+  modes: 32
+
+dataset_args:
+  ETTh1:
+    default_args:
+      embed: timeF
+      factor: 3
+
+provenance:
+  ETTh1: THUML_official_script
+  remaining_public_datasets: local_historical_and_implementation_defaults
+  wind1: private_dataset_common_protocol
+  wind2: private_dataset_common_protocol
+  official_repository: https://github.com/thuml/Time-Series-Library

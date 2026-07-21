@@ -15,7 +15,7 @@ These scripts reproduce the main comparison protocol for DTFformer and the seven
 
 ## Shared experimental protocol
 
-To make the comparison transparent, `_run_model.sh` explicitly applies the same training protocol to every model:
+To make the comparison transparent, `_run_model.sh` resolves the common protocol and model-specific settings from the YAML files under `configs/`:
 
 | Setting | Value |
 | --- | --- |
@@ -24,20 +24,13 @@ To make the comparison transparent, `_run_model.sh` explicitly applies the same 
 | Datasets | ETTh1, ETTh2, ETTm1, ETTm2, Weather, Wind1, Wind2 |
 | Repeated runs | 3 |
 | Random seed | Initialized once with 2021 before the repetitions |
-| Encoder layers | 2 |
-| Decoder layers | 1 |
-| Model dimension | 512 |
-| Attention heads | 8 |
-| Feed-forward dimension | 2048 |
-| Patch length / stride | 16 / 8 |
-| Dropout | 0.1 |
 | Batch size | 64 |
 | Learning rate | 5e-5 |
 | Maximum epochs | 10 |
 | Early-stopping patience | 3 |
 | Loss | MSE |
 
-FilterTS additionally uses the model-specific filtering values published in its official scripts: `quantile=0.9`, `bandwidth=1`, `top_K_static_freqs=10`, and `filter_type=all`. TimeMixer explicitly records its average-pooling down-sampling configuration. These options describe model-specific operations rather than extra training budget.
+Architecture parameters are model-specific rather than part of the shared training budget. DTFformer uses `d_model=512`, `n_heads=8`, `e_layers=2`, `d_ff=2048`, `dropout=0.1`, and patch length/stride `16/8`. FilterTS additionally uses the filtering values published in its official scripts: `quantile=0.9`, `bandwidth=1`, `top_K_static_freqs=10`, and `filter_type=all`. TimeMixer explicitly records its average-pooling down-sampling configuration. Dataset- and horizon-specific values are documented in each model YAML.
 
 For each dataset-and-horizon setting, the script starts one `run.py` process. Python, NumPy, and PyTorch are seeded once with `2021` before that process enters its repetition loop, matching the repetition-loop behavior of the original local runners. The generators are not reseeded between the three repetitions; their states advance naturally as the runs execute.
 
@@ -71,7 +64,13 @@ Use a specific Python executable when needed:
 PYTHON_BIN="/path/to/python" bash scripts/long_term_forecast/DTFformer.sh
 ```
 
-Dataset paths and dimensions are selected by `run.py`. Prepare the files according to the data layout in the root README before running these scripts.
+Dataset paths and dimensions are selected from `configs/common.yaml` by `run_config.py`. Prepare the files according to the data layout in the root README before running these scripts.
+
+Preview the fully resolved command without starting training:
+
+```bash
+python run_config.py --model PatchTST --data ETTh1 --pred_len 96 --dry_run
+```
 
 ## Upstream script references
 
