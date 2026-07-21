@@ -85,7 +85,7 @@ python run.py \
 
 Available models are `DTFformer`, `DLinear`, `FEDformer`, `FilterTS`, `PatchTST`, `TimeMixer`, `WPMixer`, and `iTransformer`.
 
-The main experimental settings reported in the paper use an input length of 96, prediction lengths in `{96, 192, 336, 720}`, a batch size of 64, two encoder layers, a model dimension of 512, eight attention heads, a learning rate of `5e-5`, and three independent runs.
+The main experimental settings reported in the paper use an input length of 96, prediction lengths in `{96, 192, 336, 720}`, a batch size of 64, two encoder layers, a model dimension of 512, eight attention heads, a learning rate of `5e-5`, and three repeated runs. For each dataset-and-horizon setting, the random number generators are initialized once with seed `2021` before the repetition loop and are not reseeded between repetitions.
 
 ## Reproduction scripts
 

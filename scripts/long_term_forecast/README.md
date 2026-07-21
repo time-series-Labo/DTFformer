@@ -22,8 +22,8 @@ To make the comparison transparent, `_run_model.sh` explicitly applies the same 
 | Input length | 96 |
 | Prediction lengths | 96, 192, 336, 720 |
 | Datasets | ETTh1, ETTh2, ETTm1, ETTm2, Weather, Wind1, Wind2 |
-| Independent runs | 3 |
-| Base seed | 2021; subsequent runs use 2022 and 2023 |
+| Repeated runs | 3 |
+| Random seed | Initialized once with 2021 before the repetitions |
 | Encoder layers | 2 |
 | Decoder layers | 1 |
 | Model dimension | 512 |
@@ -38,6 +38,8 @@ To make the comparison transparent, `_run_model.sh` explicitly applies the same 
 | Loss | MSE |
 
 FilterTS additionally uses the model-specific filtering values published in its official scripts: `quantile=0.9`, `bandwidth=1`, `top_K_static_freqs=10`, and `filter_type=all`. TimeMixer explicitly records its average-pooling down-sampling configuration. These options describe model-specific operations rather than extra training budget.
+
+For each dataset-and-horizon setting, the script starts one `run.py` process. Python, NumPy, and PyTorch are seeded once with `2021` before that process enters its repetition loop, matching the repetition-loop behavior of the original local runners. The generators are not reseeded between the three repetitions; their states advance naturally as the runs execute.
 
 ## Usage
 
@@ -54,7 +56,7 @@ Run the full comparison suite:
 bash scripts/long_term_forecast/run_all.sh
 ```
 
-The full suite contains 224 experiment settings before accounting for the three independent runs, so it can take a long time. Environment variables can be used for a smaller reproducibility check:
+The full suite contains 224 experiment settings before accounting for the three repeated runs, so it can take a long time. Environment variables can be used for a smaller reproducibility check:
 
 ```bash
 DTF_DATASETS="ETTh1 weather" \

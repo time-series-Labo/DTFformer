@@ -68,7 +68,7 @@ def build_setting(args, run_index: int = 0) -> str:
         f"_df{args.d_ff}_lr{args.learning_rate}_do{args.dropout}"
         f"_pln{args.patch_len}_st{args.stride}"
         f"_expand{args.expand}_dc{args.d_conv}_fc{args.factor}"
-        f"_eb{args.embed}_dt{args.distil}_seed{args.seed + run_index}_{args.des}_{run_index}"
+        f"_eb{args.embed}_dt{args.distil}_seed{args.seed}_{args.des}_{run_index}"
     )
 
 
@@ -162,7 +162,7 @@ def get_args():
     parser.add_argument("--top_K_static_freqs", type=int, default=50)
 
     # optimization
-    parser.add_argument("--itr", type=int, default=1)
+    parser.add_argument("--itr", type=int, default=3)
     parser.add_argument("--train_epochs", type=int, default=10)
     parser.add_argument("--batch_size", type=int, default=64)
     parser.add_argument("--num_workers", type=int, default=0)
@@ -195,6 +195,9 @@ def get_args():
 
 if __name__ == "__main__":
     args = get_args()
+    # Match the original local experiment runners: initialize the random
+    # generators once, then let their state advance across repetitions.
+    set_seed(args.seed)
     args = apply_dataset_defaults(args)
 
     if args.gpu_type == "cuda" and not torch.cuda.is_available():
@@ -226,7 +229,6 @@ if __name__ == "__main__":
     if args.is_training:
         mses, maes = [], []
         for ii in range(args.itr):
-            set_seed(args.seed + ii)
             exp = Exp(args)
             setting = build_setting(args, ii)
 
@@ -254,7 +256,6 @@ if __name__ == "__main__":
                 f.write(build_setting(args, args.itr - 1) + "\n")
                 f.write(f"MSE: {avg_mse:.4f} +/- {std_mse:.4f}, MAE: {avg_mae:.4f} +/- {std_mae:.4f}\n\n")
     else:
-        set_seed(args.seed)
         exp = Exp(args)
         setting = build_setting(args, 0)
         print(f">>>>>>>testing : {setting}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
