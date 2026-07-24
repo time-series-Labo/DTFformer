@@ -73,14 +73,10 @@ The ETT datasets are available from the [ETDataset repository](https://github.co
 Train and evaluate DTFformer on ETTh1 with an input length of 96 and a prediction length of 96:
 
 ```bash
-python run.py \
-  --is_training 1 \
-  --model_id ETTh1_96_96 \
+python run_config.py \
   --model DTFformer \
   --data ETTh1 \
-  --seq_len 96 \
-  --pred_len 96 \
-  --itr 3
+  --pred_len 96
 ```
 
 Available models are `DTFformer`, `DLinear`, `FEDformer`, `FilterTS`, `PatchTST`, `TimeMixer`, `WPMixer`, and `iTransformer`.
