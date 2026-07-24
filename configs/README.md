@@ -41,7 +41,7 @@ The Bash scripts under `scripts/long_term_forecast/` use this resolver automatic
 
 ## Configuration policy
 
-- The paper protocol uses input length 96, prediction lengths 96, 192, 336, and 720, Adam with learning rate 5e-5, batch size 64, at most 10 epochs, patience 3, and three repeated runs.
+- The paper protocol uses input length 96, prediction lengths 96, 192, 336, and 720, Adam with learning rate 5e-5, batch size 64 for the ETT datasets and 32 for the Weather and Wind datasets, at most 10 epochs, patience 3, and three repeated runs.
 - Public-dataset architecture parameters use official scripts where compatible and available.
 - Missing public-dataset settings fall back to recovered local settings or current implementation defaults, recorded in each file's `provenance` section.
 - Wind1 and Wind2 are private datasets. Applicable baseline parameters follow the DTFformer protocol, while model-specific operations retain their baseline defaults.
