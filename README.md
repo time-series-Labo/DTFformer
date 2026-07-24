@@ -81,7 +81,7 @@ python run_config.py \
 
 Available models are `DTFformer`, `DLinear`, `FEDformer`, `FilterTS`, `PatchTST`, `TimeMixer`, `WPMixer`, and `iTransformer`.
 
-The shared experimental protocol uses an input length of 96, prediction lengths in `{96, 192, 336, 720}`, batch size 64, learning rate `5e-5`, and three repeated runs. DTFformer uses two encoder layers, model dimension 512, and eight attention heads; baseline architecture parameters are recorded separately in their model configurations. For each dataset-and-horizon setting, the random number generators are initialized once with seed `2021` before the repetition loop and are not reseeded between repetitions.
+The shared experimental protocol uses an input length of 96, prediction lengths in `{96, 192, 336, 720}`, learning rate `5e-5`, and three repeated runs. The batch size is set to 64 for the ETT datasets and 32 for the Weather and Wind datasets. DTFformer uses two encoder layers, model dimension 512, and eight attention heads; baseline architecture parameters are recorded separately in their model configurations. For each dataset-and-horizon setting, the random number generators are initialized once with seed `2021` before the repetition loop and are not reseeded between repetitions.
 
 ## Training and testing DTFformer
 

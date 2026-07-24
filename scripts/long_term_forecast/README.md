@@ -24,7 +24,7 @@ To make the comparison transparent, `_run_model.sh` resolves the common protocol
 | Datasets | ETTh1, ETTh2, ETTm1, ETTm2, Weather, Wind1, Wind2 |
 | Repeated runs | 3 |
 | Random seed | Initialized once with 2021 before the repetitions |
-| Batch size | 64 |
+| Batch size | 64 for ETT; 32 for Weather and Wind |
 | Learning rate | 5e-5 |
 | Maximum epochs | 10 |
 | Early-stopping patience | 3 |

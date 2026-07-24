@@ -20,6 +20,7 @@ datasets:
     enc_in: 7
     dec_in: 7
     c_out: 7
+    batch_size: 64
   ETTh2:
     data: ETTh2
     root_path: dataset/ETT/
@@ -29,6 +30,7 @@ datasets:
     enc_in: 7
     dec_in: 7
     c_out: 7
+    batch_size: 64
   ETTm1:
     data: ETTm1
     root_path: dataset/ETT/
@@ -38,6 +40,7 @@ datasets:
     enc_in: 7
     dec_in: 7
     c_out: 7
+    batch_size: 64
   ETTm2:
     data: ETTm2
     root_path: dataset/ETT/
@@ -47,6 +50,7 @@ datasets:
     enc_in: 7
     dec_in: 7
     c_out: 7
+    batch_size: 64
   weather:
     data: weather
     root_path: dataset/
@@ -56,6 +60,7 @@ datasets:
     enc_in: 21
     dec_in: 21
     c_out: 21
+    batch_size: 32
   wind1:
     data: wind1
     root_path: dataset/
@@ -65,6 +70,7 @@ datasets:
     enc_in: 26
     dec_in: 26
     c_out: 26
+    batch_size: 32
   wind2:
     data: wind2
     root_path: dataset/
@@ -74,6 +80,7 @@ datasets:
     enc_in: 26
     dec_in: 26
     c_out: 26
+    batch_size: 32
 
 training_args:
   train_epochs: 10
