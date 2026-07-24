@@ -160,10 +160,10 @@ For the three MSE values and three MAE values:
 
 ## Main experiment result files
 
-The released result files contain the complete DTFformer main-experiment results and the results of four representative main baselines: WPMixer, iTransformer, PatchTST, and FEDformer.
+The released result files contain the complete DTFformer main-experiment results and the results of all seven main baselines: FilterTS, WPMixer, iTransformer, TimeMixer, PatchTST, DLinear, and FEDformer.
 
 - [DTFformer main-experiment results](results/DTFformer.txt)
-- [Four representative main-baseline results](results/Baselines.txt)
+- [All seven main-baseline results](results/Baselines.txt)
 
 ## Reproduction scripts
 
