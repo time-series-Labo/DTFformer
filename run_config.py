@@ -105,11 +105,12 @@ def main() -> None:
     parser.add_argument("--seq_len", type=int)
     parser.add_argument("--itr", type=int)
     parser.add_argument("--seed", type=int)
+    parser.add_argument("--is_training", type=int, choices=(0, 1))
     parser.add_argument("--dry_run", action="store_true")
     args, extra_args = parser.parse_known_args()
 
     resolved = resolve_args(args.model, args.data, args.pred_len)
-    for key in ("seq_len", "itr", "seed"):
+    for key in ("seq_len", "itr", "seed", "is_training"):
         value = getattr(args, key)
         if value is not None:
             resolved[key] = value
