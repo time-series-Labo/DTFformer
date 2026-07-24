@@ -167,7 +167,14 @@ class Exp_Long_Term_Forecast(Exp_Basic):
         test_data, test_loader = self._get_data(flag='test')
         if test:
             print('loading model')
-            self.model.load_state_dict(torch.load(os.path.join('./checkpoints/' + setting, 'checkpoint.pth')))
+            checkpoint_path = os.path.join(
+                self.args.checkpoints,
+                setting,
+                'checkpoint.pth'
+            )
+            self.model.load_state_dict(
+                torch.load(checkpoint_path, map_location=self.device)
+            )
 
         preds = []
         trues = []

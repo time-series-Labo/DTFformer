@@ -264,8 +264,11 @@ if __name__ == "__main__":
                 f.write(build_setting(args, args.itr - 1) + "\n")
                 f.write(f"MSE: {avg_mse:.4f} +/- {std_mse:.4f}, MAE: {avg_mae:.4f} +/- {std_mae:.4f}\n\n")
     else:
+        run_index = 0
         exp = Exp(args)
-        setting = build_setting(args, 0)
-        print(f">>>>>>>testing : {setting}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
-        exp.test(setting, test=1)
+        setting = build_setting(args, run_index)
+        print(f">>>>>>>loading and testing : {setting}<<<<<<<<<<<<<<<<<<<<")
+        mse, mae = exp.test(setting, test=1)
+        print(f"Test MSE: {mse:.6f}")
+        print(f"Test MAE: {mae:.6f}")
         clear_device_cache(args)
