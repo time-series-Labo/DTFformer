@@ -162,6 +162,13 @@ For the three MSE values and three MAE values:
 - Best MSE is the minimum MSE among the three runs;
 - Best MAE is the minimum MAE among the three runs.
 
+## Main experiment result files
+
+The released result files contain the complete DTFformer main-experiment results and the results of four representative main baselines: WPMixer, iTransformer, PatchTST, and FEDformer.
+
+- [DTFformer main-experiment results](results/DTFformer.txt)
+- [Four representative main-baseline results](results/Baselines.txt)
+
 ## Reproduction scripts
 
 Model-specific scripts for DTFformer and all seven baselines are provided under [`scripts/long_term_forecast`](scripts/long_term_forecast). They cover the seven paper datasets and all four prediction lengths with the shared training protocol documented above.
